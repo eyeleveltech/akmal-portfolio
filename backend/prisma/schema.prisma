@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Article {
+  id        String   @id @default(cuid())
+  category  String
+  title     String
+  excerpt   String
+  platform  String
+  readTime  String
+  url       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  company     String?
+  date        String
+  time        String
+  meetLink    String?
+  createdAt   DateTime @default(now())
+}
