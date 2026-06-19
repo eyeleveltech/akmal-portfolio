@@ -3,19 +3,31 @@
  * feature. Run it AFTER you have set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
  * in your .env file:
  *
- *   npx ts-node src/getGoogleToken.ts
+ *   npm run get-google-token
  *
- * It opens a local server on http://localhost:5000/oauth2callback, prints a
- * Google consent URL to visit, and once you approve, prints the refresh token
- * to paste into .env as GOOGLE_REFRESH_TOKEN. Stop your dev server first so
- * port 5000 is free.
+ * LOCAL machine (default): listens on http://localhost:5000/oauth2callback.
+ * Stop your dev server first so port 5000 is free.
+ *
+ * PRODUCTION server (browser is on a different device): set a public redirect
+ * URI that points back to the VPS, and a free local port for Apache to proxy:
+ *
+ *   OAUTH_REDIRECT_URI="https://akmalrahman.com/oauth2callback" \
+ *   OAUTH_CALLBACK_PORT=5050 npm run get-google-token
+ *
+ * The redirect URI must be added to your Google OAuth client's
+ * "Authorized redirect URIs", and Apache must proxy /oauth2callback to the
+ * local port (see DEPLOYMENT.md). The refresh token is printed to paste into
+ * .env as GOOGLE_REFRESH_TOKEN.
  */
 import 'dotenv/config';
 import http from 'http';
 import { google } from 'googleapis';
 
-const PORT = 5000;
-const REDIRECT_URI = `http://localhost:${PORT}/oauth2callback`;
+// Port the helper's local server listens on (Apache proxies to this in prod).
+const PORT = Number(process.env.OAUTH_CALLBACK_PORT) || 5000;
+// Redirect URI registered in Google Console. Defaults to localhost for local use.
+const REDIRECT_URI =
+  process.env.OAUTH_REDIRECT_URI || `http://localhost:${PORT}/oauth2callback`;
 const SCOPES = ['https://www.googleapis.com/auth/calendar.events'];
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
