@@ -6,7 +6,7 @@ export function Nav() {
 
   return (
     <>
-      <nav id="nav" className="fixed top-0 left-0 right-0 z-50 py-3 px-5 sm:px-[clamp(1.5rem,5vw,4.5rem)] flex justify-between items-center bg-[#FAFAF7]/90 backdrop-blur-md border-b border-transparent transition-all duration-300">
+      <nav id="nav" className="fixed top-0 left-0 right-0 z-50 py-3 px-5 sm:px-[clamp(1.5rem,5vw,4.5rem)] flex justify-between items-center bg-[#FAFAF7]/90 backdrop-blur-md border-b border-[#E0DCD2] transition-all duration-300">
         <a href="#hero" onClick={() => setIsOpen(false)} className="shrink-0 block z-10">
           <img src={logo} className="block w-[130px] sm:w-auto h-auto sm:h-[2.2rem] md:h-[1.7rem] lg:h-[3.2rem] mix-blend-multiply object-contain" alt="Akmal Rahman" />
         </a>
