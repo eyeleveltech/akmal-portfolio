@@ -23,6 +23,7 @@ model Booking {
   id          String   @id @default(cuid())
   name        String
   email       String
+  phone       String?
   company     String?
   date        String
   time        String

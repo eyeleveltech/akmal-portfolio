@@ -1,71 +1,39 @@
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "@/lib/api";
+
+type Article = {
+  id?: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  platform: string;
+  readTime: string;
+  url: string;
+};
 
 export function WritingSection() {
-  const [articles, setArticles] = useState<any[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticles = () => {
-      axios.get("http://localhost:5000/api/articles")
+      axios.get<Article[]>(`${API_URL}/articles`)
         .then(res => {
-          if (res.data && res.data.length > 0) {
-            setArticles(res.data);
-          }
+          setArticles(Array.isArray(res.data) ? res.data : []);
         })
-        .catch(err => console.error("Failed to fetch articles:", err));
+        .catch(err => console.error("Failed to fetch articles:", err))
+        .finally(() => setLoading(false));
     };
 
     fetchArticles();
-    // Poll every 2 seconds for instant updates across tabs
-    const interval = setInterval(fetchArticles, 2000);
+    // Poll every 5 seconds so edits from the admin panel show up live.
+    const interval = setInterval(fetchArticles, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  const fallbackArticles = [
-    {
-      category: "Client-Side Insider",
-      title: "Why every agency brief you've ever written has probably missed the point",
-      excerpt: "The problem isn't that agencies don't listen. It's that we brief them on tactics when what we actually need is for them to understand our business model...",
-      platform: "LinkedIn",
-      readTime: "",
-      url: "#"
-    },
-    {
-      category: "AI + Marketing",
-      title: "The AI tools that actually saved hours — and the ones that just looked good in demos",
-      excerpt: "Six months of testing AI tools inside actual client campaigns. Here's what moved the needle — and what was just hype dressed up in a nice interface...",
-      platform: "LinkedIn",
-      readTime: "",
-      url: "#"
-    },
-    {
-      category: "360-Degree Philosophy",
-      title: "Marketing isn't a department. It's a disposition.",
-      excerpt: "The companies that grow fastest don't have great marketing teams. They have founders who understand that everything is marketing — from how you hire to how you price...",
-      platform: "LinkedIn",
-      readTime: "",
-      url: "#"
-    },
-    {
-      category: "Client-Side Insider",
-      title: "What Agencies Don't Tell You When They Pitch to You",
-      excerpt: "The deck is rehearsed. The strategy is not. I've been on both sides of the pitch table — as the marketing head being sold to, and now as the one pitching. Here's what actually happens in the room.",
-      platform: "Medium",
-      readTime: "4 min read",
-      url: "https://medium.com/@akmal_29859/what-agencies-dont-tell-you-when-they-pitch-to-you-bc754ff54ddc"
-    },
-    {
-      category: "360-Degree Philosophy",
-      title: "The Mamdani Method: What Every Founder Can Steal From the Most Effective Digital Communicator in Modern Politics",
-      excerpt: "I reverse-engineered how Zohran Mamdani built a mass following — and realised I'd been making all the wrong branding mistakes. Here's the framework any founder can apply.",
-      platform: "Medium",
-      readTime: "9 min read",
-      url: "https://medium.com/@akmal_29859/the-mamdani-method-what-every-founder-can-steal-from-the-most-effective-digital-communicator-in-ebc5a9f980e3"
-    }
-  ];
-
-  const displayData = articles.length > 0 ? articles : fallbackArticles;
+  const displayData = articles;
 
   return (
     <>
@@ -81,6 +49,9 @@ export function WritingSection() {
               <button onClick={() => window.open("https://medium.com/@akmal_29859", "_blank", "noopener noreferrer")} className="inline-flex items-center gap-2.5 border-[1.5px] border-[#1C4A2E] text-[#1C4A2E] text-sm font-semibold tracking-[0.02em] px-6 py-3 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-[#1C4A2E] hover:text-white hover:-translate-y-px">Medium <ArrowUpRight className="size-5" /></button>
             </div>
           </div>
+          {!loading && displayData.length === 0 && (
+            <p className="text-black/40 italic">No articles published yet.</p>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
             {displayData.map((article, i) => (
               <a key={article.id || i} className="bg-white border-[1.5px] border-[#E0DCD2] rounded-[16px] p-[clamp(1.5rem,3vw,2.5rem)] flex flex-col transition-all duration-200 text-inherit hover:border-[#1C4A2E] hover:shadow-[0_8px_32px_rgba(28,74,46,.1)] hover:-translate-y-[3px] group h-full" href={article.url} target={article.url !== "#" ? "_blank" : undefined} rel="noopener noreferrer">

@@ -66,7 +66,7 @@ app.post('/api/articles', authenticateAdmin, async (req: Request, res: Response)
 import { createMeetEvent } from './services/googleCalendar';
 
 app.post('/api/book-call', async (req: Request, res: Response) => {
-  const { name, email, company, date, time } = req.body;
+  const { name, email, phone, company, date, time } = req.body;
 
   if (!name || !email || !date || !time) {
     res.status(400).json({ error: 'Missing required fields' });
@@ -92,6 +92,7 @@ app.post('/api/book-call', async (req: Request, res: Response) => {
       data: {
         name,
         email,
+        phone,
         company,
         date,
         time,

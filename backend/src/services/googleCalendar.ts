@@ -1,6 +1,27 @@
 import { google } from 'googleapis';
 import crypto from 'crypto';
 
+// The frontend sends time as a 12-hour string like "02:30 PM". Convert it to
+// 24-hour "HH:MM" so `new Date(\`${date}T${time}:00\`)` parses correctly.
+// Also accepts an already-24-hour "HH:MM" value unchanged.
+function to24Hour(time: string): string {
+  const match = time.trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)?$/i);
+  if (!match) {
+    throw new Error(`Unrecognised time format: "${time}"`);
+  }
+
+  let hours = parseInt(match[1], 10);
+  const minutes = match[2];
+  const meridiem = match[3]?.toUpperCase();
+
+  if (meridiem) {
+    if (hours === 12) hours = 0;
+    if (meridiem === 'PM') hours += 12;
+  }
+
+  return `${String(hours).padStart(2, '0')}:${minutes}`;
+}
+
 export async function createMeetEvent(name: string, email: string, date: string, time: string) {
   const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN } = process.env;
 
@@ -18,21 +39,30 @@ export async function createMeetEvent(name: string, email: string, date: string,
 
   const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
-  // Parse date and time (assuming date is YYYY-MM-DD and time is HH:MM in local timezone, but we'll assume it's roughly parsed)
-  // Let's create a generic start time and end time (+30 mins) based on the inputs
-  const startTime = new Date(`${date}T${time}:00`);
-  const endTime = new Date(startTime.getTime() + 30 * 60000);
+  // The booked time is wall-clock time in the host's timezone (configurable,
+  // defaults to Asia/Kolkata). We build naive "YYYY-MM-DDTHH:MM:SS" strings
+  // and let Google interpret them in `timeZone`. Arithmetic for the 30-minute
+  // end time is done by treating the naive value as UTC purely for the +30min
+  // shift, then stripping back to a naive wall-clock string (this also handles
+  // hour/day rollover correctly).
+  const timeZone = process.env.GOOGLE_CALENDAR_TIMEZONE || 'Asia/Kolkata';
+  const startNaive = new Date(`${date}T${to24Hour(time)}:00Z`);
+  if (isNaN(startNaive.getTime())) {
+    throw new Error(`Invalid date/time: "${date}" "${time}"`);
+  }
+  const endNaive = new Date(startNaive.getTime() + 30 * 60000);
+  const toWallClock = (d: Date) => d.toISOString().slice(0, 19); // drop the trailing "Z"
 
   const event = {
     summary: `Meeting with ${name}`,
     description: `Booked via website.`,
     start: {
-      dateTime: startTime.toISOString(),
-      timeZone: 'UTC', // Using UTC for simplicity, adjust to your local timezone if needed
+      dateTime: toWallClock(startNaive),
+      timeZone,
     },
     end: {
-      dateTime: endTime.toISOString(),
-      timeZone: 'UTC',
+      dateTime: toWallClock(endNaive),
+      timeZone,
     },
     attendees: [{ email }],
     conferenceData: {

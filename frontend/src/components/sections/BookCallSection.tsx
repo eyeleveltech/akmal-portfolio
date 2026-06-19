@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Clock, User, Building2, Calendar, Video } from "lucide-react";
+import { API_URL } from "@/lib/api";
 
 export function BookCallSection() {
   const [step, setStep] = useState(1);
@@ -77,8 +78,8 @@ export function BookCallSection() {
     setError("");
 
     try {
-      await axios.post("http://localhost:5000/api/book-call", {
-        name, email, company, date, time
+      await axios.post(`${API_URL}/book-call`, {
+        name, email, phone, company, date, time
       });
       setStep(3);
     } catch (err) {

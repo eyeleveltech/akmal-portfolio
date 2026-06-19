@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
-
-const API_URL = "http://localhost:5000/api";
+import { API_URL } from "@/lib/api";
 
 const DEFAULT_FORM = {
   category: "",
@@ -208,7 +207,7 @@ export function Admin() {
                         {(provided) => (
                           <div
                             ref={provided.innerRef}
-                            {...provided.draggableProps}
+                            {...(provided.draggableProps as React.HTMLAttributes<HTMLDivElement>)}
                             {...provided.dragHandleProps}
                             className="bg-white border-[1.5px] border-[#E0DCD2] rounded-[16px] p-6 flex flex-col hover:border-[#1C4A2E] hover:shadow-lg transition-all duration-200 cursor-grab active:cursor-grabbing"
                           >
