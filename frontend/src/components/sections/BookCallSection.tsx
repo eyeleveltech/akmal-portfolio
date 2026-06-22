@@ -102,7 +102,7 @@ export function BookCallSection() {
     <section id="book" className="py-[clamp(5.5rem,11vw,10rem)] bg-[#F2EEE6] border-t border-[#E0DCD2]">
       <div className="max-w-[860px] mx-auto px-[clamp(1.5rem,5vw,4.5rem)]">
         <div className="text-center mb-14">
-          <p className="text-xs font-semibold tracking-[0.15em] uppercase text-[#1C4A2E] inline-flex items-center gap-3 mb-3 before:content-[''] before:inline-block before:w-[22px] before:h-px before:bg-[#1C4A2E]">Book a call</p>
+          <p className="text-xs font-semibold tracking-[0.15em] uppercase text-[#1C4A2E] inline-flex items-center gap-3 mb-3 before:content-[''] before:inline-block before:w-1.5 before:h-1.5 before:bg-black before:rounded-full">Book a call</p>
           <h2>30 minutes to figure out<br />if this is a <em>good fit.</em></h2>
           <p className="mt-3.5 text-sm text-black/50">Pick a date and time that works. I'll send a Google Meet link and a confirmation straight to your inbox.</p>
         </div>
@@ -148,7 +148,7 @@ export function BookCallSection() {
                   <input type="text" value={company} onChange={e => setCompany(e.target.value)} className="bg-white border-[1.5px] border-[#E0DCD2] rounded-[10px] px-4 py-3.5 font-sans text-sm text-black w-full outline-none focus:border-[#1C4A2E]" placeholder="Your company name" />
                 </div>
               </div>
-              <button type="submit" className="bg-[#1C4A2E] text-white rounded-full px-9 py-4 text-sm font-semibold mt-6 self-start hover:bg-[#2A6840]">
+              <button type="submit" className="bg-[#1C4A2E] text-white rounded-full px-9 py-4 text-sm font-semibold mt-6 self-start transition-all duration-250 hover:bg-[#2A6840] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(28,74,46,.35)]">
                 Pick a time &#8594;
               </button>
             </form>

@@ -7,3 +7,5 @@ export * from './CredentialsSection';
 export * from './TestimonialsSection';
 export * from './BookCallSection';
 export * from './Footer';
+export * from './WhoIWorkWithSection';
+export * from './FractionalCMOSection';

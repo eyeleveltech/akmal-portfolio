@@ -133,6 +133,7 @@ app.put('/api/articles/:id', authenticateAdmin, async (req: Request, res: Respon
     });
     res.json(article);
   } catch (error) {
+    console.error("PUT Error:", error);
     res.status(500).json({ error: 'Failed to update article' });
   }
 });
@@ -144,6 +145,7 @@ app.delete('/api/articles/:id', authenticateAdmin, async (req: Request, res: Res
     });
     res.json({ message: 'Article deleted successfully' });
   } catch (error) {
+    console.error("DELETE Error:", error);
     res.status(500).json({ error: 'Failed to delete article' });
   }
 });

@@ -1,5 +1,4 @@
 type Education = { degree: string; school: string };
-type Certification = { title: string; issuer: string };
 
 const education: Education[] = [
   {
@@ -12,13 +11,6 @@ const education: Education[] = [
   },
 ];
 
-const certifications: Certification[] = [
-  { title: "Digital Marketing & E-commerce Specialization", issuer: "Google" },
-  { title: "AI-Powered Marketing Mastermind", issuer: "Outskill" },
-  { title: "Marketing Analytics & Measurement", issuer: "Google" },
-  { title: "Create a Google Ads Search Campaign", issuer: "Google / Coursera" },
-  { title: "Vibe Coding — L4 Platinum", issuer: "Lovable" },
-];
 
 const skills: string[] = [
   "Brand Strategy",
@@ -45,13 +37,13 @@ export function CredentialsSection() {
       className="bg-[#FAFAF7] py-[clamp(5rem,10vh,9rem)] px-[clamp(1.5rem,5vw,4.5rem)] border-t border-[#E0DCD2]"
     >
       <div className="max-w-[1360px] mx-auto w-full">
-        <p className="text-xs font-semibold tracking-[0.15em] uppercase text-[#1C4A2E] inline-flex items-center gap-3 mb-7 before:content-[''] before:inline-block before:w-[22px] before:h-px before:bg-[#1C4A2E]">
+        <p className="text-xs font-semibold tracking-[0.15em] uppercase text-[#1C4A2E] inline-flex items-center gap-3 mb-7 before:content-[''] before:inline-block before:w-1.5 before:h-1.5 before:bg-black before:rounded-full">
           Background
         </p>
         <h2 className="font-serif text-[clamp(1.75rem,3vw,3.25rem)] tracking-[-0.02em] leading-[1.1] mb-12">
           Where I learned to think
           <br />
-          <em>about marketing differently.</em>
+          <em>about marketing differently</em>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.15fr] gap-[clamp(2.5rem,5vw,5.5rem)] mb-16 items-start">
@@ -73,25 +65,6 @@ export function CredentialsSection() {
             ))}
           </div>
 
-          {/* Certifications */}
-          <div className="flex flex-col">
-            <p className={eyebrow}>Certifications</p>
-            <div className="flex flex-col">
-              {certifications.map((item) => (
-                <div
-                  key={item.title}
-                  className="py-[1.1rem] border-t border-[#E0DCD2] flex flex-col gap-0.5 last:border-b"
-                >
-                  <p className="text-[0.875rem] font-semibold text-black leading-[1.35]">
-                    {item.title}
-                  </p>
-                  <p className="text-[0.75rem] text-black/50 tracking-[0.02em]">
-                    {item.issuer}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Skills */}

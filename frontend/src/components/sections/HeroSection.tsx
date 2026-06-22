@@ -14,14 +14,14 @@ export function HeroSection() {
             Founder · EyeLevel Growth Studio · Chennai
           </p>
           <h1 className="font-serif text-[clamp(2.5rem,5vw,7rem)] leading-[0.94] tracking-[-0.03em] mb-0 opacity-0 animate-[fu_0.9s_ease_0.5s_forwards]">
-            The marketing practitioner who sat on <em>your side.</em>
+            The marketing practitioner who sat on <em>your side</em>
           </h1>
           <div className="flex flex-col gap-8 mt-[clamp(2rem,4vh,3.5rem)]">
             <p className="text-[clamp(0.95rem,1.3vw,1.1rem)] font-light text-black/70 leading-[1.7] max-w-[400px] opacity-0 animate-[fu_0.8s_ease_0.7s_forwards]">
               I've been the client who hired agencies and got let down. Then I
               built the one I always wished I could hire.
               <strong className="text-[#0D0D0B] font-medium block mt-2">
-                Now I run it — and sometimes, I become yours.
+                Now I run it - and sometimes, I become yours.
               </strong>
             </p>
             <div className="shrink-0 flex flex-col items-start gap-3 opacity-0 animate-[fu_0.8s_ease_0.9s_forwards]">

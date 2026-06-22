@@ -1,4 +1,4 @@
-# Akmal Portfolio — Deployment & Update Guide
+# Akmal Portfolio - Deployment & Update Guide
 
 Live site: **https://akmalrahman.com** · Admin: **https://akmalrahman.com/admin**
 
@@ -17,7 +17,7 @@ akmal-portfolio/
 ## Making changes
 
 ### A) Change article content (no code, no redeploy)
-The Writing section is fully managed from the admin panel — **no deployment needed**.
+The Writing section is fully managed from the admin panel - **no deployment needed**.
 
 1. Go to **https://akmalrahman.com/admin**
 2. Log in with `ADMIN_USERNAME` / `ADMIN_PASSWORD` from `backend/.env`
@@ -47,7 +47,7 @@ If you changed the **frontend** (look / text / sections):
 cd frontend
 npm install
 npm run build
-# Apache serves the new files immediately — no restart needed
+# Apache serves the new files immediately - no restart needed
 ```
 
 If you changed the **backend** (API / logic):
@@ -127,7 +127,7 @@ sudo chown -R $USER:$USER /var/www/akmal-portfolio
 cd /var/www/akmal-portfolio/backend
 nano .env
 ```
-Paste (real values — this file is NOT in git):
+Paste (real values - this file is NOT in git):
 ```env
 DATABASE_URL="postgresql://akmal_user:STRONG_DB_PASSWORD@localhost:5432/akmal_portfolio?schema=public"
 PORT=5000
@@ -213,7 +213,7 @@ While the OAuth consent screen is in **Testing** mode, refresh tokens expire aft
 
 | Symptom | Check |
 |--------|-------|
-| `npm error ENOENT package.json` | You're in the repo root — `cd backend` or `cd frontend` first |
+| `npm error ENOENT package.json` | You're in the repo root - `cd backend` or `cd frontend` first |
 | `datasource.url required` / `password must be a string` | `backend/.env` missing or `DATABASE_URL` not set. Test: `node -e "require('dotenv/config');console.log(process.env.DATABASE_URL)"` |
 | `P1000 Authentication failed` | DB password in `.env` ≠ actual user password. Reset: `sudo -u postgres psql -c "ALTER USER akmal_user WITH PASSWORD 'NewPass123';"` then update `.env` |
 | Site loads but no articles | `pm2 status` (API up?), `pm2 logs akmal-api`, `curl localhost:5000/api/articles` |

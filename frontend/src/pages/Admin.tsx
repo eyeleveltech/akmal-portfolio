@@ -36,7 +36,10 @@ export function Admin() {
     try {
       const res = await axios.get(`${API_URL}/articles`);
       setArticles(res.data);
-    } catch (err) {
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        handleLogout();
+      }
       console.error("Failed to fetch articles", err);
     }
   };
@@ -91,9 +94,14 @@ export function Admin() {
       });
       fetchArticles();
       setDeleteConfirmId(null);
-    } catch (err) {
-      alert("Failed to delete article");
-      console.error(err);
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        alert("Session expired. Please log in again.");
+        handleLogout();
+      } else {
+        alert("Failed to delete article");
+        console.error(err);
+      }
     }
   };
 
@@ -112,9 +120,14 @@ export function Admin() {
       await axios.put(`${API_URL}/articles/reorder`, { items: payload }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-    } catch (err) {
-      console.error("Failed to reorder articles", err);
-      fetchArticles();
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        alert("Session expired. Please log in again.");
+        handleLogout();
+      } else {
+        console.error("Failed to reorder articles", err);
+        fetchArticles();
+      }
     }
   };
 
@@ -133,9 +146,14 @@ export function Admin() {
       }
       setShowModal(false);
       fetchArticles();
-    } catch (err) {
-      alert("Failed to save article");
-      console.error(err);
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        alert("Session expired. Please log in again.");
+        handleLogout();
+      } else {
+        alert("Failed to save article");
+        console.error(err);
+      }
     } finally {
       setFormLoading(false);
     }

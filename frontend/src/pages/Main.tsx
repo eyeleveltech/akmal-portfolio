@@ -10,7 +10,9 @@ import {
   CredentialsSection,
   TestimonialsSection,
   BookCallSection,
-  Footer
+  Footer,
+  WhoIWorkWithSection,
+  FractionalCMOSection
 } from "@/components/sections";
 
 export function MainSite() {
@@ -33,13 +35,15 @@ export function MainSite() {
       <Nav />
       <HeroSection />
       <StorySection />
+      <FractionalCMOSection />
       <WorkSection />
+      <WhoIWorkWithSection />
       <WritingSection />
       <CredentialsSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <BookCallSection />
       <Footer />
-      
+
       <div id="cur-dot"></div>
       <div id="cur-ring"></div>
     </>

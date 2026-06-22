@@ -41,7 +41,7 @@ export function WritingSection() {
         <div className="max-w-[1360px] mx-auto w-full">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-[clamp(2.5rem,5vh,4.5rem)] flex-wrap gap-6">
             <div>
-              <p className="text-xs font-semibold tracking-[0.15em] uppercase text-[#1C4A2E] inline-flex items-center gap-3 mb-7 before:content-[''] before:inline-block before:w-[22px] before:h-px before:bg-[#1C4A2E]">Writing</p>
+              <p className="text-xs font-semibold tracking-[0.15em] uppercase text-[#1C4A2E] inline-flex items-center gap-3 mb-7 before:content-[''] before:inline-block before:w-1.5 before:h-1.5 before:bg-black before:rounded-full">Writing</p>
               <h2 className="font-serif text-[clamp(2rem,3.5vw,3.75rem)] tracking-[-0.02em] leading-[1.1]"><em>How</em> I think out loud</h2>
             </div>
             <div className="flex gap-4 flex-wrap">
