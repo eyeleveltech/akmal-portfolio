@@ -45,7 +45,7 @@ export function WritingSection() {
               <h2 className="font-serif text-[clamp(2rem,3.5vw,3.75rem)] tracking-[-0.02em] leading-[1.1]"><em>How</em> I think out loud</h2>
             </div>
             <div className="flex gap-4 flex-wrap">
-              <button onClick={() => window.open("https://www.linkedin.com/in/akmalrahman", "_blank", "noopener noreferrer")} className="inline-flex items-center gap-2.5 border-[1.5px] border-[#1C4A2E] text-[#1C4A2E] text-sm font-semibold tracking-[0.02em] px-6 py-3 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-[#1C4A2E] hover:text-white hover:-translate-y-px">LinkedIn <ArrowUpRight className="size-5" /></button>
+              <button onClick={() => window.open("https://www.linkedin.com/in/akmalbillekar/", "_blank", "noopener noreferrer")} className="inline-flex items-center gap-2.5 border-[1.5px] border-[#1C4A2E] text-[#1C4A2E] text-sm font-semibold tracking-[0.02em] px-6 py-3 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-[#1C4A2E] hover:text-white hover:-translate-y-px">LinkedIn <ArrowUpRight className="size-5" /></button>
               <button onClick={() => window.open("https://medium.com/@akmal_29859", "_blank", "noopener noreferrer")} className="inline-flex items-center gap-2.5 border-[1.5px] border-[#1C4A2E] text-[#1C4A2E] text-sm font-semibold tracking-[0.02em] px-6 py-3 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-[#1C4A2E] hover:text-white hover:-translate-y-px">Medium <ArrowUpRight className="size-5" /></button>
             </div>
           </div>

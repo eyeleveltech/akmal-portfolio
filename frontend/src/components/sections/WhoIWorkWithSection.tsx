@@ -8,9 +8,9 @@ export function WhoIWorkWithSection() {
           Who I work with
         </p>
         <div className="max-w-[800px]">
-          <p className="text-[clamp(1.25rem,2vw,1.75rem)] font-serif leading-[1.4] text-black mb-8">
+          <h2 className="font-serif text-[clamp(1.75rem,3vw,3.25rem)] tracking-[-0.02em] leading-[1.1] text-black mb-8">
             Companies that have a real business but no senior marketing person to own it
-          </p>
+          </h2>
           <p className="text-[1.0625rem] text-black/70 leading-[1.7] mb-8">
             You are past the stage of figuring out what you do. What you need now is someone who can build the marketing function and run it, not just execute a campaign.
           </p>

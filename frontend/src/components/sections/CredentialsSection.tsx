@@ -11,6 +11,47 @@ const education: Education[] = [
   },
 ];
 
+type Experience = { role: string; company: string; summary: string };
+
+const experience: Experience[] = [
+  {
+    company: "Kido",
+    role: "Head of Global Marketing",
+    summary:
+      "Led GTM and performance marketing across UK, US, and India for a premium early education brand.",
+  },
+  {
+    company: "FreshToHome",
+    role: "Head of Marketing Operations",
+    summary:
+      "Scaled a high-growth food startup through full-funnel marketing, CRM, and city-by-city GTM launches.",
+  },
+  {
+    company: "Express Avenue",
+    role: "General Manager — Marketing",
+    summary:
+      "Drove footfall and revenue for one of Chennai's largest malls — curating events and managing the full commercial experience inside the property.",
+  },
+  {
+    company: "SPR Construction",
+    role: "Senior Manager — Marketing",
+    summary:
+      "Owned brand building and demand generation for a ₹500 Cr integrated township, from media to walk-ins.",
+  },
+  {
+    company: "Hyundai Motor Company",
+    role: "Senior Executive — Marketing & PR",
+    summary:
+      "Managed communications, PR, and brand activations for the manufacturing plant.",
+  },
+  {
+    company: "Schwing Stetter India",
+    role: "Corporate Communications Executive",
+    summary:
+      "Ran internal and dealer network communications across 30+ partners nationwide.",
+  },
+];
+
 
 const skills: string[] = [
   "Brand Strategy",
@@ -67,8 +108,28 @@ export function CredentialsSection() {
 
         </div>
 
+        {/* Where I've worked */}
+        <div className="flex flex-col mb-16">
+          <p className={eyebrow}>Where I've worked</p>
+          {experience.map((item) => (
+            <div
+              key={item.company}
+              className="py-6 border-t border-[#E0DCD2] flex flex-col gap-1 last:border-b"
+            >
+              <p className="font-serif text-[1.375rem] leading-[1.25] text-black tracking-[-0.01em]">
+                {item.company}
+                <span className="text-black/40"> · </span>
+                <span className="text-black/70">{item.role}</span>
+              </p>
+              <p className="text-[0.9375rem] text-black/50 mt-1 leading-[1.55]">
+                {item.summary}
+              </p>
+            </div>
+          ))}
+        </div>
+
         {/* Skills */}
-        <div className="pt-10 border-t border-[#E0DCD2]">
+        <div className="pt-10">
           <p className="text-xs font-semibold tracking-[0.14em] uppercase text-black/50 mb-5 inline-flex items-center gap-3 before:content-[''] before:inline-block before:w-[18px] before:h-px before:bg-[#1C4A2E] before:opacity-50">
             Skills
           </p>
